@@ -2,6 +2,7 @@
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.document_loaders.xml import UnstructuredXMLLoader
+from langchain.document_loaders.excel import UnstructuredExcelLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -19,7 +20,7 @@ def get_files(dir_path):
             if filename.endswith(".md"):
                 # 如果满足要求，将其绝对路径加入到结果列表
                 file_list.append(os.path.join(filepath, filename))
-            elif filename.endswith(".xml"):
+            elif filename.endswith(".xls"):
                 file_list.append(os.path.join(filepath, filename))
     return file_list
 
@@ -37,6 +38,8 @@ def get_text(dir_path):
             loader = UnstructuredMarkdownLoader(one_file)
         elif file_type == 'xml':
             loader = UnstructuredXMLLoader(one_file)
+        elif file_type == 'xls':
+            loader = UnstructuredExcelLoader(one_file)
         else:
             # 如果是不符合条件的文件，直接跳过
             continue
