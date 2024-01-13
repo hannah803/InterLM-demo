@@ -1,9 +1,9 @@
 # 首先导入所需第三方库
-from langchain_community.document_loaders import UnstructuredFileLoader
-from langchain_community.document_loaders import UnstructuredMarkdownLoader
-from langchain_community.document_loaders.xml import UnstructuredXMLLoader
+from langchain.document_loaders import UnstructuredFileLoader
+from langchain.document_loaders import UnstructuredMarkdownLoader
+from langchain.document_loaders.xml import UnstructuredXMLLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from tqdm import tqdm
 import os
