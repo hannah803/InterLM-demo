@@ -5,6 +5,7 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import os
 from LLM import InternLM_LLM
 from langchain.prompts import PromptTemplate
+from openxlab.model import download
 
 def load_chain():
     # 加载问答链
@@ -20,7 +21,7 @@ def load_chain():
         embedding_function=embeddings
     )
 
-    llm = InternLM_LLM(model_path = "internlm/internlm-7b")
+    llm = InternLM_LLM(model_path = "/home/xlab-app-center/internlm/internlm-chat-7b")
 
     # 你可以修改这里的 prompt template 来试试不同的问答效果
     template = """请使用以下提供的上下文来回答用户的问题。如果无法从上下文中得到答案，请回答你不知道，并总是使用中文回答。
@@ -44,6 +45,10 @@ def load_chain():
     
     return qa_chain
 
+def Download():
+    download(model_repo='OpenLMLab/InternLM-chat-7b',output='/home/xlab-app-center/internlm/internlm-chat-7b')
+
+
 class Model_center():
     """
     存储问答 Chain 的对象 
@@ -64,7 +69,7 @@ class Model_center():
         except Exception as e:
             return e, chat_history
 
-
+Download()
 model_center = Model_center()
 
 block = gr.Blocks()
