@@ -1,6 +1,7 @@
 # 首先导入所需第三方库
 from langchain_community.document_loaders import UnstructuredFileLoader
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
+from langchain_community.document_loaders.xml import UnstructuredXMLLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -35,7 +36,7 @@ def get_text(dir_path):
         if file_type == 'md':
             loader = UnstructuredMarkdownLoader(one_file)
         elif file_type == 'xml':
-            loader = UnstructuredFileLoader(one_file)
+            loader = UnstructuredXMLLoader(one_file)
         else:
             # 如果是不符合条件的文件，直接跳过
             continue
