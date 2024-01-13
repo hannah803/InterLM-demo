@@ -1,6 +1,6 @@
 # 导入必要的库
 import gradio as gr
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import os
 from LLM import InternLM_LLM
