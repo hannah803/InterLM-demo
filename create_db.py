@@ -18,7 +18,7 @@ def get_files(dir_path):
             if filename.endswith(".md"):
                 # 如果满足要求，将其绝对路径加入到结果列表
                 file_list.append(os.path.join(filepath, filename))
-            elif filename.endswith(".txt"):
+            elif filename.endswith(".xml"):
                 file_list.append(os.path.join(filepath, filename))
     return file_list
 
@@ -34,7 +34,7 @@ def get_text(dir_path):
         file_type = one_file.split('.')[-1]
         if file_type == 'md':
             loader = UnstructuredMarkdownLoader(one_file)
-        elif file_type == 'txt':
+        elif file_type == 'xml':
             loader = UnstructuredFileLoader(one_file)
         else:
             # 如果是不符合条件的文件，直接跳过
