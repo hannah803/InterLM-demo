@@ -14,7 +14,7 @@ import chromadb
 def load_chain():
     # 加载问答链
     # 定义 Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformer")
+    embeddings = HuggingFaceEmbeddings(model_name="/home/xlab-app-center/sentence-transformer")
 
     # 向量数据库持久化路径
     persist_directory = 'database/vector_db/mydatabase'
@@ -53,7 +53,7 @@ def Download():
     download(model_repo='OpenLMLab/InternLM-chat-7b',output='/home/xlab-app-center/internlm/internlm-chat-7b')
     os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
     # 下载模型
-    os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir sentence-transformer')
+    os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir /home/xlab-app-center/sentence-transformer')
 
 
 
