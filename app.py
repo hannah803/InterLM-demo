@@ -17,7 +17,7 @@ def load_chain():
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
     # 向量数据库持久化路径
-    persist_directory = 'data_base/vector_db/chroma'
+    persist_directory = 'database/vector_db/mydatabase'
 
     # 加载数据库
     vectordb = Chroma(
