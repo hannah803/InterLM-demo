@@ -1,8 +1,7 @@
 # 首先导入所需第三方库
 from langchain.document_loaders import UnstructuredFileLoader
-from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.document_loaders.xml import UnstructuredXMLLoader
-from langchain.document_loaders.excel import UnstructuredExcelLoader
+from langchain.document_loaders import UnstructuredExcelLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -17,10 +16,10 @@ def get_files(dir_path):
         # os.walk 函数将递归遍历指定文件夹
         for filename in filenames:
             # 通过后缀名判断文件类型是否满足要求
-            if filename.endswith(".md"):
+            if filename.endswith(".xls"):
                 # 如果满足要求，将其绝对路径加入到结果列表
                 file_list.append(os.path.join(filepath, filename))
-            elif filename.endswith(".xls"):
+            elif filename.endswith(".xml"):
                 file_list.append(os.path.join(filepath, filename))
     return file_list
 
@@ -34,12 +33,10 @@ def get_text(dir_path):
     # 遍历所有目标文件
     for one_file in tqdm(file_lst):
         file_type = one_file.split('.')[-1]
-        if file_type == 'md':
-            loader = UnstructuredMarkdownLoader(one_file)
+        if file_type == 'xls':
+            loader = UnstructuredExcelLoader(one_file)
         elif file_type == 'xml':
             loader = UnstructuredXMLLoader(one_file)
-        elif file_type == 'xls':
-            loader = UnstructuredExcelLoader(one_file)
         else:
             # 如果是不符合条件的文件，直接跳过
             continue
@@ -48,7 +45,7 @@ def get_text(dir_path):
 
 # 目标文件夹
 tar_dir = [
-    "./data",
+    "/root/data/mine/datasrc"
 ]
 
 # 加载目标文件
@@ -59,14 +56,14 @@ for dir_path in tar_dir:
 # 对文本进行分块
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=500, chunk_overlap=150)
-split_docs = text_splitter.split_documents(docs[:10])
+split_docs = text_splitter.split_documents(docs)
 
 # 加载开源词向量模型
-embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+embeddings = HuggingFaceEmbeddings(model_name="/root/data/model/sentence-transformer")
 
 # 构建向量数据库
 # 定义持久化路径
-persist_directory = 'data_base/vector_db/chroma'
+persist_directory = 'data_base/vector_db/mydatabase'
 # 加载数据库
 vectordb = Chroma.from_documents(
     documents=split_docs,
