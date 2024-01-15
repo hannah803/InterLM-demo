@@ -73,7 +73,6 @@ class Model_center():
         except Exception as e:
             return e, chat_history
 
-exec(open('create_db.py').read())
 
 Download()
 model_center = Model_center()
